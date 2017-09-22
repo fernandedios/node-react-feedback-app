@@ -1,7 +1,7 @@
 {
-	"name": "NodeJs Collection App Server",
+	"name": "node-react-feedback-app",
 	"version": "1.0.0",
-	"description": "",
+	"description": "NodeJs Collection App Server",
 	"main": "index.js",
 	"engines": {
 		"node": "8.1.1",
