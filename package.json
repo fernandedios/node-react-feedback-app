@@ -1,7 +1,7 @@
 {
 	"name": "node-react-feedback-app",
 	"version": "1.0.0",
-	"description": "NodeJs Collection App Server",
+	"description": "NodeJs ReactJs Feedback Collection App Server",
 	"main": "index.js",
 	"engines": {
 		"node": "8.1.1",
@@ -9,11 +9,14 @@
 	},
 	"scripts": {
 		"start": "node index.js",
+		"dev": "nodemon index.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Fernan de Dios",
 	"license": "MIT",
 	"dependencies": {
-		"express": "^4.15.4"
+		"express": "^4.15.4",
+		"passport": "^0.4.0",
+		"passport-google-oauth20": "^1.0.0"
 	}
 }
