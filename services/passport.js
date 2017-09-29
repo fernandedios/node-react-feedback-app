@@ -5,6 +5,20 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users'); // pull out user model class from mongoose
 
+// define serializeUser
+passport.serializeUser((user, done) => {
+	done(null, user.id); // call done callback, pass error as null, return user.id
+});
+
+// define deserializeUser
+passport.deserializeUser((id, done) => {
+	User.findById(id)
+		.then((user) => {
+			done(null, user); // call done callback, pass error as null, return user
+		})
+		.catch((err) => done(err, null));
+});
+
 // make passport to use GoogleStrategy
 passport.use(
 	new GoogleStrategy(
@@ -19,7 +33,19 @@ passport.use(
 			// console.log('refresh token', refreshToken);
 			// console.log('profile', profile);
 
-			new User({ googleId: profile.id }).save(); // save model instance to mongodb
+			// check if user exists
+			User.findOne({ googleId: profile.id })
+				.then((existingUser) => {
+					if (existingUser) {
+						done(null, existingUser); // call done callback, pass error as null, return existingUser
+					}
+					else {
+						new User({ googleId: profile.id })
+							.save() // save model instance to mongodb
+							.then(user => done(null, user));  // call done callback, pass error as null, return user from db
+					}
+				})
+				.catch((err) => done(err, null));
 		}
 	)
 );
