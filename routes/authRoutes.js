@@ -19,6 +19,7 @@ module.exports = (app) => {
   });
 
   app.get('/api/current_user', (req, res) => {
+    // res.send(req.session); // returns { passport: user._id } as session
     res.send(req.user);
   });
 };

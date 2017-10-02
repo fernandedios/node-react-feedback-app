@@ -13,7 +13,7 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-// use cookies
+// use cookies via middleware
 app.use(
 	cookieSession({
 		maxAge: 30 * 24 * 60 * 60 * 1000, // cookie expiration, 30 days in millisecs
