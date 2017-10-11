@@ -25,7 +25,7 @@ passport.use(
 		{
 			clientID: keys.googleCLientID,
 			clientSecret: keys.googleCLientSecret,
-			proxy: true, // retain https when going through a proxy
+			proxy: true, // allow proxy to retain https protocol
 			callbackURL: '/auth/google/callback' // redirect to this url after authentication from google
 		},
 
