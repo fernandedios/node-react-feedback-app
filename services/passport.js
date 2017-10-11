@@ -30,24 +30,21 @@ passport.use(
 		},
 
 		// callback when accessToken is received from google
-		(accessToken, refreshToken, profile, done) => {
+		async (accessToken, refreshToken, profile, done) => {
 			// console.log('access token', accessToken);
 			// console.log('refresh token', refreshToken);
 			// console.log('profile', profile);
 
 			// check if user exists
-			User.findOne({ googleId: profile.id })
-				.then((existingUser) => {
-					if (existingUser) {
-						done(null, existingUser); // call done callback, pass error as null, return existingUser
-					}
-					else {
-						new User({ googleId: profile.id })
-							.save() // save model instance to mongodb
-							.then(user => done(null, user));  // call done callback, pass error as null, return user from db
-					}
-				})
-				.catch((err) => done(err, null));
+			const existingUser = await User.findOne({ googleId: profile.id });
+			if (existingUser) {
+				// call done callback, pass error as null, return existingUser
+				return done(null, existingUser);
+			}
+			const user = await new User({ googleId: profile.id }).save(); // save model instance to mongodb
+
+			// call done callback, pass error as null, return user from db
+			done(null, user);
 		}
 	)
 );
