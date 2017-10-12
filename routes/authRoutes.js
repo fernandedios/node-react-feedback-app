@@ -10,12 +10,22 @@ module.exports = (app) => {
   );
 
   // hanlde callback using passport
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+
+    // send user to dashboard after logging in
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+  );
 
   // logout user
   app.get('/api/logout', (req, res) => {
     req.logout(); // attached automatically by passport, kill cookie
-    res.send(req.user);
+
+    // send user to landing page
+    res.redirect('/');
   });
 
   app.get('/api/current_user', (req, res) => {
