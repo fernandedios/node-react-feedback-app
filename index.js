@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const keys = require('./config/keys');
 const PORT = process.env.PORT || 5000;
@@ -12,6 +13,10 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();
+
+// use body-parser middleware
+// since express does NOT parse incoming request bodies automatically
+app.use(bodyParser.json());
 
 // use cookies via middleware
 app.use(
@@ -25,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app); // immediately call function, attach app
+require('./routes/billingRoutes')(app);
 
 app.listen(PORT, () => {
 	console.log(`Server started at port ${PORT}`);
