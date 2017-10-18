@@ -6,6 +6,7 @@ import Payments from './Payments';
 
 class Header extends Component {
   renderContent() {
+    // this.props.auth contains the user model
     switch(this.props.auth) {
       case null:
         return;

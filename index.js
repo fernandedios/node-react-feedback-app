@@ -32,6 +32,19 @@ app.use(passport.session());
 require('./routes/authRoutes')(app); // immediately call function, attach app
 require('./routes/billingRoutes')(app);
 
+// necessary since there is NO create-react-app client server in production
+if (process.env.NODE_ENV === 'production') {
+	// Make express serve up production assets
+	app.use(express.static('client/build'));
+
+	// Express will serve up react client index.html
+	// if route is unrecognized
+	const path = require('path');
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	})
+}
+
 app.listen(PORT, () => {
 	console.log(`Server started at port ${PORT}`);
 });
