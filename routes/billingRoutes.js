@@ -1,8 +1,11 @@
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretKey); // pass secret key
 
+const requireLogin = require('../middlewares/requireLogin');
+
+// use requireLogin to check if user is authenticated
 module.exports = app => {
-  app.post('/api/stripe', async (req, res) => {
+  app.post('/api/stripe', requireLogin, async (req, res) => {
     // console.log(req.body);
 
     const charge = await stripe.charges.create({
@@ -12,6 +15,10 @@ module.exports = app => {
       source: req.body.id // id response from stripe
     });
 
-    // console.log(charge);
+    // passport by default stores user model inside req.user
+    req.user.credits += 5; // add 5 credits
+    const user = await req.user.save(); // save user
+
+    res.send(user);
   });
 };
