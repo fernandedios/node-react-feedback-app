@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 const PORT = process.env.PORT || 5000;
 
-require('./models/user'); // run this first before the passport file
+require('./models/User'); // run this first before the passport file
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
