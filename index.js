@@ -30,8 +30,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// route handlers
 require('./routes/authRoutes')(app); // immediately call function, attach app
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // necessary since there is NO create-react-app client server in production
 if (process.env.NODE_ENV === 'production') {
