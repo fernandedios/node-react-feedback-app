@@ -8,6 +8,7 @@ const keys = require('./config/keys');
 const PORT = process.env.PORT || 5000;
 
 require('./models/User'); // run this first before the passport file
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -42,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 	const path = require('path');
 	app.get('*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-	})
+	});
 }
 
 app.listen(PORT, () => {
