@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
-const surveyTemplate = require('../services/surveyTemplate');
+const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 const Survey = mongoose.model('surveys'); // get model directly from mongoose
 
@@ -25,5 +25,6 @@ module.exports = app => {
     });
 
     const mailer = new Mailer(survey, surveyTemplate(survey));
+    mailer.send(); // send email
   });
 };

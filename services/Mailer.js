@@ -18,7 +18,7 @@ class Mailer extends helper.Mail {
     this.addRecipients(); // register recipients to actual email
   }
 
-  formatAddresses() {
+  formatAddresses(recipients) {
     return recipients.map(({ email }) => { // wrap in parens to make destructuring work
       return new helper.Email(email); // format with email helper
     });
@@ -29,7 +29,7 @@ class Mailer extends helper.Mail {
     const clickTracking = new helper.ClickTracking(true, true);
 
     trackingSettings.setClickTracking(clickTracking);
-    this.addClickTrackingSettings(trackingSettings);
+    this.addTrackingSettings(trackingSettings);
   }
 
   addRecipients() {
@@ -49,7 +49,7 @@ class Mailer extends helper.Mail {
       body: this.toJSON() // convert to JSON data
     });
 
-    this.sgApi.API(request); // send to sendgrid
+    const response = this.sgApi.API(request); // send to sendgrid
     return response;
   }
 }
