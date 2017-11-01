@@ -7,9 +7,16 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys'); // get model directly from mongoose
 
 module.exports = app => {
+  // route handler for survey response landing page
+  app.get('/api/surveys/thanks', (req, res) => {
+    res.send('Thanks for voting!');
+  });
+
   // check if user is authenticated, check if user has enough credits
   // take special care of the middleware order
-  app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
+  // async await operation
+  // TODO: Make user provide a custom thank you url
+  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
     const survey = new Survey({
@@ -25,6 +32,18 @@ module.exports = app => {
     });
 
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    mailer.send(); // send email
+
+    try {
+      await mailer.send(); // send email
+      await survey.save(); // save survey to db
+
+      req.user.credits -= 1; // deduct credit
+      const user = await req.user.save(); // save user
+
+      res.send(user); // send updated user model as response
+    }
+    catch (err) {
+      res.status(422).send(err);  // send unprocessable entity status code
+    }
   });
 };

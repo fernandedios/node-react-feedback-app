@@ -49,7 +49,7 @@ class Mailer extends helper.Mail {
       body: this.toJSON() // convert to JSON data
     });
 
-    const response = this.sgApi.API(request); // send to sendgrid
+    const response = await this.sgApi.API(request); // send to sendgrid
     return response;
   }
 }
