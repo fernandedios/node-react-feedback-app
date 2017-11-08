@@ -20,6 +20,9 @@ export const handleToken = (token) => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data }); // reuse FETCH_USER to update header
 };
 
-export const submitSurvey = (values) => {
-  return { type: 'SUBMIT_SURVEY' };
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', values);
+
+  history.push('/surveys'); // navigate to /surveys 
+  dispatch({ type: FETCH_USER, payload: res.data }); // reuse FETCH_USER to update header
 };

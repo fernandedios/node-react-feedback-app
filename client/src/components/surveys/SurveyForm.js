@@ -38,7 +38,7 @@ class SurveyForm extends Component {
 function validate(values) {
   const errors = {};
 
-  errors.emails = validateEmails(values.emails || ''); // use validateEmails utility
+  errors.recipients = validateEmails(values.recipients || ''); // use validateEmails utility
 
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
@@ -53,5 +53,5 @@ function validate(values) {
 export default reduxForm({
   validate, // add validate function
   form: 'surveyForm', // set namespace for form field values -> this.state.form.surveyForm
-  destroyOnUnmount: false // persist form data even if form is not visible
+  destroyOnUnmount: false // persist form data even when this component is unmounted
 })(SurveyForm);
