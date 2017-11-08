@@ -1,3 +1,6 @@
+const _ = require('lodash');
+const Path = require('path-parser');
+const { URL } = require('url'); // builtin node module
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -10,6 +13,27 @@ module.exports = app => {
   // route handler for survey response landing page
   app.get('/api/surveys/thanks', (req, res) => {
     res.send('Thanks for voting!');
+  });
+
+  // route handler for sendgrid webhook
+  app.post('/api/surveys/webhook', (req, res) => {
+    // console.log(req.body);
+    const p = new Path('/api/surveys/:surveyId/:choice') // set pattern for extracting surveyId and choice
+
+    const events = _chain(req.body) // start lodash chain
+      .map(({ email, url }) => {
+        // extract route, no domain using URL
+        const match = p.test(new URL(url).pathname); // will return null if surveyId and choice could not be extracted
+
+        if (match) {
+          const { surveyId, choice } = match;
+          return { email, surveyId, choice };
+        }
+      })
+      .compact() // remove any undefined elements
+      .uniqBy('email', 'surveyId') // remove duplicate elements based on email and surveyId properties
+      .value(); // get final value of chain
+
   });
 
   // check if user is authenticated, check if user has enough credits
