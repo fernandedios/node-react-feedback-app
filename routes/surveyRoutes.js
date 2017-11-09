@@ -10,6 +10,15 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const Survey = mongoose.model('surveys'); // get model directly from mongoose
 
 module.exports = app => {
+  // get list of surveys of the current user
+  app.get('/api/surveys', requireLogin, async (req, res) => {
+    // current logged-in user is stored as req.user
+    const surveys = await Survey.find({ _user: req.user.id })
+      .select({ recipients: false }); // exclude recipients subdocuments in the response
+
+    res.send(surveys);
+  });
+
   // route handler for survey response landing page
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
