@@ -11,7 +11,7 @@ const Survey = mongoose.model('surveys'); // get model directly from mongoose
 
 module.exports = app => {
   // route handler for survey response landing page
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
 
@@ -20,7 +20,7 @@ module.exports = app => {
     // console.log(req.body);
     const p = new Path('/api/surveys/:surveyId/:choice') // set pattern for extracting surveyId and choice
 
-    const events = _chain(req.body) // start lodash chain
+    _.chain(req.body) // start lodash chain
       .map(({ email, url }) => {
         // extract route, no domain using URL
         const match = p.test(new URL(url).pathname); // will return null if surveyId and choice could not be extracted
@@ -32,7 +32,23 @@ module.exports = app => {
       })
       .compact() // remove any undefined elements
       .uniqBy('email', 'surveyId') // remove duplicate elements based on email and surveyId properties
+      .each(({ email, surveyId, choice }) => { // iterate thru each elemt in the array
+        Survey.updateOne({
+          _id: surveyId,
+          recipients: {
+            $elemMatch: { email, responded: false } // recipients record should match email and responded = false
+          }
+        },
+        {
+          $inc: { [choice]: 1 }, // use interpollation to set object prop to 'yes' or 'no'. increment by 1
+          $set: { 'recipients.$.responded': true }, // look at recipients subdoc, update element returned by $elemMatch, set responded = true
+          lastResponded: new Date()
+
+        }).exec(); // execute query to db
+      })
       .value(); // get final value of chain
+
+    res.send({}); // send empty response to sendgrid
 
   });
 
