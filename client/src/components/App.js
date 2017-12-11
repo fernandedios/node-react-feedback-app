@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions'; // get all action creators
 
+import TopHeader from './TopHeader';
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
@@ -19,7 +20,8 @@ class App extends Component {
     // exact //- match the path exactly in order to show the component, === exact={true}
     return (
         <BrowserRouter>
-          <div className="container">
+          <div>
+            <TopHeader />
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
