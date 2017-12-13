@@ -13,15 +13,15 @@ class Header extends Component {
 
       case false:
         return (
-          <li><a href="/auth/google">Login With Google</a></li>
+          <li className="nav-item"><a href="/auth/google">Login With Google</a></li>
         );
 
       default:
         // return an array of li's
         return [
-          <li key="1"><Payments /></li>,
-          <li key="2" style={{ margin: '0 10px' }}>Credits: {this.props.auth.credits}</li>,
-          <li key="3"><a href="/api/logout">Logout</a></li>
+          <li className="nav-item" key="1"><Payments /></li>,
+          <li className="nav-item" key="2"><a className="nav-link" href="#">Credits: {this.props.auth.credits}</a></li>,
+          <li className="nav-item" key="3"><a className="nav-link" href="/api/logout">Logout</a></li>
         ];
     }
   }
@@ -29,17 +29,22 @@ class Header extends Component {
   render() {
     // if signed in, link logo to dashboard, otherwise link to root
     return (
-      <nav>
-        <div className="nav-wrapper">
+      <nav class="navbar navbar-toggleable-sm navbar-light bg-default">
+        <div class="container">
           <Link
             to={this.props.auth ? '/surveys' : '/'}
-            className="left brand-logo"
+            className="navbar-brand"
             >
             Surveyly
           </Link>
-          <ul className="right">
-            {this.renderContent()}
-          </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbar2">
+            <ul class="navbar-nav">
+              {this.renderContent()}
+            </ul>
+          </div>
         </div>
       </nav>
     );
