@@ -1,12 +1,16 @@
 import React from 'react';
+import LandingHeader from './common/LandingHeader';
+import InfoIcons from './common/InfoIcons';
+import InfoSection from './common/InfoSection';
+import GetStarted from './common/GetStarted';
 
 const Landing = () => {
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>
-        Surveyly!
-      </h1>
-      Collect feedback from your users
+    <div>
+      <LandingHeader />
+      <InfoIcons />
+      <GetStarted />
+      <InfoSection />
     </div>
   );
 };
