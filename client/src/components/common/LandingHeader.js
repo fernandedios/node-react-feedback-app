@@ -1,4 +1,4 @@
-import LandingHeader from 'react';
+import React from 'react';
 
 const LandingHeader = () => {
   return (
@@ -9,7 +9,7 @@ const LandingHeader = () => {
             <div className="pt-3" id="header-home">
               <h1>Create your online survey now!</h1>
               <p>Get the data you need to make better decisions.</p>
-              <p><button type="button" className="btn std-btn btn-filled">Sign Up Now</button></p>
+              <p><a href="/auth/google" className="btn std-btn btn-filled">Learn More</a></p>
             </div>
           </div>
         </div>
