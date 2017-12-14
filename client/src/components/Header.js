@@ -13,7 +13,7 @@ class Header extends Component {
 
       case false:
         return (
-          <li className="nav-item"><a className="nav-item" href="/auth/google">Login With Google</a></li>
+          <li className="nav-item"><a className="nav-link" href="/auth/google">Login With Google</a></li>
         );
 
       default:
