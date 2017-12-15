@@ -21,7 +21,7 @@ const SurveySamples = () => {
               <img className="card-img-top" src="http://lorempixel.com/200/200/business/2" />
               <div className="card-block text-center">
                 <h3 className="card-title">Pre-Event Survey</h3>
-                <p className="card-text">This survey can be used in advance of an event to help with planning and preparation, including identifying location ...</p>
+                <p className="card-text">This survey can be used in advance of an event to help with planning and preparation, including identifying location...</p>
                 <a href="#" className="btn card-btn btn-common">Learn More</a>
               </div>
             </div>
@@ -44,7 +44,7 @@ const SurveySamples = () => {
             <div className="card">
               <img className="card-img-top" src="http://lorempixel.com/200/200/business/4" />
               <div className="card-block text-center">
-                <h3 className="card-title">Professional Development Course</h3>
+                <h3 className="card-title">Professional Development</h3>
                 <p className="card-text">Following a professional development course, this form collects participant feedback regarding the instructor, the co...</p>
                 <a href="#" className="btn card-btn btn-common">Learn More</a>
               </div>
