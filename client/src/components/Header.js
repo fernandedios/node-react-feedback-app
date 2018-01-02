@@ -20,8 +20,14 @@ class Header extends Component {
         // return an array of li's
         return [
           <li className="nav-item" key="1"><Payments /></li>,
-          <li className="nav-item" key="2"><a className="nav-link" href="#">Credits: {this.props.auth.credits}</a></li>,
-          <li className="nav-item" key="3"><a className="nav-link" href="/api/logout">Logout</a></li>
+          <li className="nav-item" key="2">
+            <Link to="/surveys/new" id="btn-survey" className="btn std-btn btn-sm btn-filled">
+              <i class="fa fa-envelope" aria-hidden="true"></i> Add Survey
+            </Link>
+          </li>,
+          <li className="nav-item" key="3"><a className="nav-link" href="#">Credits: {this.props.auth.credits}</a></li>,
+          <li className="nav-item" key="4"><a className="nav-link" href="/api/logout">Logout</a></li>
+
         ];
     }
   }

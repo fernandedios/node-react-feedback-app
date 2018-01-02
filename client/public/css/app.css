@@ -33,9 +33,13 @@
   height: 100%;
 }
 
-#btn-add-creds {
+#btn-add-creds, #btn-survey {
   margin-top: 12px;
   margin-right: 20px;
+}
+
+a#btn-survey:hover {
+  color: #fff !important;
 }
 
 footer p {
