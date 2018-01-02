@@ -11,17 +11,20 @@ class SurveyList extends Component {
     // .reverse() first to have the latest surveys on top
     return this.props.surveys.reverse().map(survey => {
       return (
-        <div key={survey._id} className="card darken-1">
-          <div className="card-content">
-            <span className="card-title">{survey.title}</span>
-            <p>{survey.body}</p>
-            <p className="right">
-              Sent On: {new Date(survey.dateSent).toLocaleDateString()}
-            </p>
-          </div>
-          <div className="card-action">
-            <a>Yes: {survey.yes}</a>
-            <a>No: {survey.no}</a>
+
+        <div key={survey._id} class="pt-3 col-md-4 col-sm-6">
+          <div class="pricing-table-block">
+            <div class="plan-name">
+              <h4 className="text-white">{survey.title}</h4>
+            </div>
+            <div class="plan-list">
+              <ul>
+                <li>{survey.body}</li>
+                <li>Sent On: {new Date(survey.dateSent).toLocaleDateString()}</li>
+                <li>Yes: {survey.yes}</li>
+                <li>No: {survey.no}</li>
+              </ul>
+            </div>
           </div>
         </div>
       );
@@ -30,7 +33,11 @@ class SurveyList extends Component {
 
   render() {
     return (
-      <div>{this.renderSurveys()}</div>
+      <div className="container">
+        <div className="row">
+          {this.renderSurveys()}
+        </div>
+      </div>
     );
   }
 }
