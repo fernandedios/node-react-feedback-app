@@ -12,12 +12,12 @@ class SurveyList extends Component {
     return this.props.surveys.reverse().map(survey => {
       return (
 
-        <div key={survey._id} class="pt-3 col-md-4 col-sm-6">
-          <div class="pricing-table-block">
-            <div class="plan-name">
+        <div key={survey._id} className="pt-3 col-md-4 col-sm-6">
+          <div className="pricing-table-block">
+            <div className="plan-name">
               <h4 className="text-white">{survey.title}</h4>
             </div>
-            <div class="plan-list">
+            <div className="plan-list">
               <ul>
                 <li>{survey.body}</li>
                 <li>Sent On: {new Date(survey.dateSent).toLocaleDateString()}</li>

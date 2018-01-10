@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import SurveyForm from './SurveyForm';
 import SurveyFormReview from './SurveyFormReview';
+import LandingHeader from '../common/LandingHeader';
 
 class SurveyNew extends Component {
   // create-react-app component level state init
@@ -18,6 +19,7 @@ class SurveyNew extends Component {
   render() {
     return(
       <div>
+        <LandingHeader location="surveys" />
         {this.renderContent()}
       </div>
     );

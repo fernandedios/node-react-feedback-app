@@ -8,16 +8,22 @@ class LandingHeader extends Component {
     let header, button, para;
 
     if (location === 'landing') {
-      header = <h1>{auth ? 'Access your surveys' : 'Create your online survey now!'}</h1>;
-      button = <p><Link to={auth ? '/surveys' : '/auth/google'} className="btn std-btn btn-filled">{auth ? 'Dashboard' : 'Learn More'}</Link></p>;
-      para = <p>Get the data you need to make better decisions.</p>;
+      header = auth ? 'Access your surveys' : 'Create your online survey now!';
+      button = <Link to={auth ? '/surveys' : '/auth/google'} className="btn std-btn btn-filled">{auth ? 'Dashboard' : 'Learn More'}</Link>;
+      para = 'Get the data you need to make better decisions.';
+    }
+
+    if(location === 'surveys') {
+      header = <h1>Create A New Survey</h1>;
+      para = 'Aliquam condimentum, quam at consequat suscipit, elit odio bibendum purus, tincidunt mollis dolor leo non lectus. Pellentesque efficitur, mauris fermentum';
+      button = '';
     }
 
     return (
       <div className="pt-3" id="header-home">
-        {header}
-        {para}
-        {button}
+        <h1>{header}</h1>
+        <p>{para}</p>
+        <p>{button}</p>
       </div>
     );
   }
