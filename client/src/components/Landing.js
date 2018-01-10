@@ -7,7 +7,7 @@ import GetStarted from './common/GetStarted';
 const Landing = () => {
   return (
     <div>
-      <LandingHeader />
+      <LandingHeader location="landing" />
       <InfoIcons />
       <GetStarted />
       <InfoSection />

@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom';
 
 class LandingHeader extends Component {
   renderContent() {
+    const { auth, location } = this.props;
+    let header, button, para;
+
+    if (location === 'landing') {
+      header = <h1>{auth ? 'Access your surveys' : 'Create your online survey now!'}</h1>;
+      button = <p><Link to={auth ? '/surveys' : '/auth/google'} className="btn std-btn btn-filled">{auth ? 'Dashboard' : 'Learn More'}</Link></p>;
+      para = <p>Get the data you need to make better decisions.</p>;
+    }
+
     return (
       <div className="pt-3" id="header-home">
-        <h1>{this.props.auth ? 'Access your surveys' : 'Create your online survey now!'}</h1>
-        <p>Get the data you need to make better decisions.</p>
-        <p><Link to={this.props.auth ? '/surveys' : '/auth/google'} className="btn std-btn btn-filled">{this.props.auth ? 'Dashboard' : 'Learn More'}</Link></p>
+        {header}
+        {para}
+        {button}
       </div>
     );
   }
