@@ -3,6 +3,8 @@ import { reduxForm } from 'redux-form';
 import SurveyForm from './SurveyForm';
 import SurveyFormReview from './SurveyFormReview';
 import LandingHeader from '../common/LandingHeader';
+import SurveySamples from '../common/SurveySamples';
+import Insight from '../common/Insight';
 
 class SurveyNew extends Component {
   // create-react-app component level state init
@@ -21,6 +23,8 @@ class SurveyNew extends Component {
       <div>
         <LandingHeader location="surveys" />
         {this.renderContent()}
+        <Insight />
+        <SurveySamples />
       </div>
     );
   }

@@ -19,6 +19,12 @@ class LandingHeader extends Component {
       button = '';
     }
 
+    if(location === 'dashboard') {
+      header = 'Your Surveys';
+      button = <Link to='/surveys/new' className="btn std-btn btn-filled">New Survey</Link>;
+      para = 'Aliquam condimentum, quam at consequat suscipit, elit odio bibendum purus, tincidunt mollis dolor leo non lectus. Pellentesque efficitur, mauris fermentum';
+    }
+
     return (
       <div className="pt-3" id="header-home">
         <h1>{header}</h1>
