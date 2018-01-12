@@ -11,23 +11,40 @@ import validateEmails from '../../utils/validateEmails';
 class SurveyForm extends Component {
   renderFields() {
     return (
-      _.map(formFields, ({ label, name }) => {
-        return <Field key={name} component={SurveyField} type="text" label={label} name={name} />
+      _.map(formFields, ({ label, name, size }) => {
+        return (
+          <div className={`col-md-${size}`}>
+            <Field key={name} component={SurveyField} type="text" label={label} name={name} />
+          </div>
+        );
       })
     );
   }
 
   render() {
     return(
-      <div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="page-header-title">
+              <h2 className="heading-title text-center">Add New Survey</h2>
+            </div>
+          </div>
+        </div>
+
         <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
-          {this.renderFields()}
+          <div className="row">
+            {this.renderFields()}
 
-          <Link to="/surveys" className="red btn-flat white-text">Cancel</Link>
-
-          <button className="teal btn-flat right white-text" type="submit">
-            Next <i className="material-icons right">done</i>
-          </button>
+            <div className="col-md-6">
+              <Link to="/surveys" className="float-right btn std-btn btn-common">Cancel</Link>
+            </div>
+            <div className="col-md-6">
+              <button class="btn std-btn btn-info-filled" type="submit">
+                Next <i className="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );

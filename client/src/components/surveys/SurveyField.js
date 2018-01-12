@@ -8,10 +8,9 @@ import React from 'react';
 export default ({ input, label, meta: { error, touched } }) => {
   // spread input property to our custom input component
   return (
-    <div>
-      <label>{label}</label>
-      <input {...input} style={{ marginBottom: '5px'}} />
-      <div className="red-text" style={{ marginBottom: '20px' }}>
+    <div className="form-group">
+      <input {...input} placeholder={label} className="form-control" />
+      <div class="help-block with-errors">
         {touched && error}
       </div>
     </div>
