@@ -44,7 +44,7 @@ module.exports = {
 ```
 
 cookieKey is a random string used for encryption.
-redirectDomain is your local development server url
+redirectDomain is your local development server url.
 Save as 'dev.js' and place it inside the config folder.
 
 ```js
@@ -69,7 +69,14 @@ REDIRECT_DOMAIN
 ```
 
 COOKIE_KEY is a random string used for encryption.
-REDIRECT_DOMAIN is your production server url
+REDIRECT_DOMAIN is your production server url.
+
+```js
+REACT_APP_STRIPE_KEY=your_stripe_publishable_key
+```
+
+Save as '.env.production' and place it inside the client folder.
+
 
 
 Thanks
