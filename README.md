@@ -77,6 +77,9 @@ REACT_APP_STRIPE_KEY=your_stripe_publishable_key
 
 Save as '.env.production' and place it inside the client folder.
 
+Preview
+---------
+Access the [application preview].
 
 
 Thanks
@@ -92,3 +95,4 @@ node-react-feedback-app* © 2018, Fernan de Dios. Released under the [MIT Licens
 [Google OAuth]: https://console.developers.google.com/apis/library
 [SendGrid Account]: https://sendgrid.com/
 [Stripe Account]: https://stripe.com/
+[application preview]: https://node-react-feedback-server.herokuapp.com/
